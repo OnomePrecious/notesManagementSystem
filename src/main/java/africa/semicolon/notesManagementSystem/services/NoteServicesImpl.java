@@ -11,6 +11,8 @@ import africa.semicolon.notesManagementSystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static africa.semicolon.notesManagementSystem.util.Mappers.*;
 
 @Service
@@ -57,5 +59,10 @@ public class NoteServicesImpl implements NoteServices{
         userRepository.save(user);
         return mapUserNoteToResponse(note);
 
+    }
+
+    @Override
+    public List<Note> findAllNote() {
+        return noteRepository.findAll();
     }
 }

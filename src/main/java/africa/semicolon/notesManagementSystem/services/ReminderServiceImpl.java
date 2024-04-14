@@ -18,11 +18,6 @@ import static africa.semicolon.notesManagementSystem.util.Mappers.*;
 public class ReminderServiceImpl implements ReminderService{
     @Autowired
     private ReminderRepository reminderRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private NoteRepository noteRepository;
-
     @Override
     public ReminderRequest createReminder(ReminderRequest reminderRequest) {
         return null;

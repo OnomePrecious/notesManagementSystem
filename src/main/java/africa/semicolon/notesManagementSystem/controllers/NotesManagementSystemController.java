@@ -1,9 +1,6 @@
 package africa.semicolon.notesManagementSystem.controllers;
 
-import africa.semicolon.notesManagementSystem.data.dto.EditNoteRequest;
-import africa.semicolon.notesManagementSystem.data.dto.LogInRequest;
-import africa.semicolon.notesManagementSystem.data.dto.NoteRequest;
-import africa.semicolon.notesManagementSystem.data.dto.RegisterRequest;
+import africa.semicolon.notesManagementSystem.data.dto.*;
 import africa.semicolon.notesManagementSystem.exception.NotesManagementSystemError;
 import africa.semicolon.notesManagementSystem.services.NoteServices;
 import africa.semicolon.notesManagementSystem.services.UserService;
@@ -15,7 +12,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
-public class NoteController {
+public class NotesManagementSystemController {
     @Autowired
     private UserService userService;
     @Autowired
@@ -24,51 +21,57 @@ public class NoteController {
     @PostMapping("/Register")
     public ResponseEntity<?> Registration(@RequestBody RegisterRequest registerRequest) {
         try {
-            return new ResponseEntity<>(userService.register(registerRequest), CREATED);
+            var result = userService.register(registerRequest);
+            return new ResponseEntity<>(new ApiResponse(true, result), CREATED);
         } catch (NotesManagementSystemError e) {
-            return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
+            return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), BAD_REQUEST);
         }
     }
 @PostMapping("log_in")
         public ResponseEntity<?> LogIn(@RequestBody LogInRequest logInRequest){
         try {
-            return new ResponseEntity<>(userService.logIn(logInRequest), CREATED);
+            var result = userService.logIn(logInRequest);
+            return new ResponseEntity<>(new ApiResponse(true, result), CREATED);
 
         } catch (NotesManagementSystemError e){
-        return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
+        return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), BAD_REQUEST);
         }
     }
     @PostMapping("log_out")
     public ResponseEntity<?> LogOut(@RequestBody LogInRequest logInRequest){
     try{
-        return new ResponseEntity<>(userService.logOut(logInRequest), CREATED);
+        var result = userService.logOut(logInRequest);
+        return new ResponseEntity<>(new ApiResponse(true, result), CREATED);
     } catch (NotesManagementSystemError e){
-        return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
+        return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), BAD_REQUEST);
     }
     }
     @PostMapping("create_note")
         public ResponseEntity<?> createNote(@RequestBody NoteRequest noteRequest) {
         try {
-            return new ResponseEntity<>(noteServices.createNote(noteRequest), CREATED);
+            var result = noteServices.createNote(noteRequest);
+            return new ResponseEntity<>(new ApiResponse(true, result), CREATED);
         } catch (NotesManagementSystemError e) {
-            return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
+            return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), BAD_REQUEST);
         }
     }
         @PostMapping("edit_note")
                 public ResponseEntity<?> updateNote(EditNoteRequest editNoteRequest) {
             try {
-                return new ResponseEntity<>(noteServices.editNote(editNoteRequest), CREATED);
+                var result = noteServices.editNote(editNoteRequest);
+                return new ResponseEntity<>(new ApiResponse(true, result), CREATED);
             } catch (NotesManagementSystemError e) {
-                return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
+                return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), BAD_REQUEST);
             }
         }
 
         @DeleteMapping("delete_note")
     public ResponseEntity<?> deleteNote(@RequestBody NoteRequest noteRequest){
         try{
-            return new ResponseEntity<>(noteServices.deleteNote(noteRequest), CREATED);
+            var result = noteServices.deleteNote(noteRequest);
+            return new ResponseEntity<>(new ApiResponse(true, result), CREATED);
         } catch (NotesManagementSystemError e){
-            return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
+            return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), BAD_REQUEST);
         }
         }
 }
