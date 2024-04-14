@@ -1,9 +1,9 @@
 package africa.semicolon.notesManagementSystem.services;
 
-import africa.semicolon.notesManagementSystem.data.dto.EditNoteRequest;
-import africa.semicolon.notesManagementSystem.data.dto.NoteRequest;
-import africa.semicolon.notesManagementSystem.data.dto.NoteResponse;
-import africa.semicolon.notesManagementSystem.models.Note;
+import africa.semicolon.notesManagementSystem.request.dto.EditNoteRequest;
+import africa.semicolon.notesManagementSystem.request.dto.NoteRequest;
+import africa.semicolon.notesManagementSystem.request.dto.NoteResponse;
+import africa.semicolon.notesManagementSystem.data.models.Note;
 
 import java.util.List;
 

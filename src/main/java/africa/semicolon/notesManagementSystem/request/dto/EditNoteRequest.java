@@ -1,6 +1,5 @@
-package africa.semicolon.notesManagementSystem.data.dto;
+package africa.semicolon.notesManagementSystem.request.dto;
 
-import africa.semicolon.notesManagementSystem.models.Tag;
 import lombok.Data;
 
 import java.time.LocalDateTime;

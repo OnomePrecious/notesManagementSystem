@@ -1,13 +1,13 @@
 package africa.semicolon.notesManagementSystem.services;
 
-import africa.semicolon.notesManagementSystem.data.dto.EditNoteRequest;
-import africa.semicolon.notesManagementSystem.data.dto.NoteRequest;
-import africa.semicolon.notesManagementSystem.data.dto.NoteResponse;
+import africa.semicolon.notesManagementSystem.request.dto.EditNoteRequest;
+import africa.semicolon.notesManagementSystem.request.dto.NoteRequest;
+import africa.semicolon.notesManagementSystem.request.dto.NoteResponse;
 import africa.semicolon.notesManagementSystem.exception.NoteDoesNotExistException;
 import africa.semicolon.notesManagementSystem.exception.UserNotFoundException;
-import africa.semicolon.notesManagementSystem.models.Note;
-import africa.semicolon.notesManagementSystem.repository.NoteRepository;
-import africa.semicolon.notesManagementSystem.repository.UserRepository;
+import africa.semicolon.notesManagementSystem.data.models.Note;
+import africa.semicolon.notesManagementSystem.data.repository.NoteRepository;
+import africa.semicolon.notesManagementSystem.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

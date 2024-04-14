@@ -1,10 +1,10 @@
 package africa.semicolon.notesManagementSystem.util;
 
-import africa.semicolon.notesManagementSystem.data.dto.*;
-import africa.semicolon.notesManagementSystem.models.Note;
-import africa.semicolon.notesManagementSystem.models.Reminder;
-import africa.semicolon.notesManagementSystem.models.Tag;
-import africa.semicolon.notesManagementSystem.models.User;
+import africa.semicolon.notesManagementSystem.request.dto.*;
+import africa.semicolon.notesManagementSystem.data.models.Note;
+import africa.semicolon.notesManagementSystem.data.models.Reminder;
+import africa.semicolon.notesManagementSystem.data.models.Tag;
+import africa.semicolon.notesManagementSystem.data.models.User;
 
 public class Mappers {
     public static void mapUserRequestToRegister(RegisterRequest request, User user){

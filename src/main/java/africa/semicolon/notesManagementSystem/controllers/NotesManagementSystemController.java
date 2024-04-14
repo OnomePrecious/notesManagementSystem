@@ -1,6 +1,6 @@
 package africa.semicolon.notesManagementSystem.controllers;
 
-import africa.semicolon.notesManagementSystem.data.dto.*;
+import africa.semicolon.notesManagementSystem.request.dto.*;
 import africa.semicolon.notesManagementSystem.exception.NotesManagementSystemError;
 import africa.semicolon.notesManagementSystem.services.NoteServices;
 import africa.semicolon.notesManagementSystem.services.UserService;

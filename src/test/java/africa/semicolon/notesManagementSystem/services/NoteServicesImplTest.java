@@ -1,8 +1,11 @@
 package africa.semicolon.notesManagementSystem.services;
 
-import africa.semicolon.notesManagementSystem.data.dto.*;
-import africa.semicolon.notesManagementSystem.repository.NoteRepository;
-import africa.semicolon.notesManagementSystem.repository.UserRepository;
+import africa.semicolon.notesManagementSystem.request.dto.EditNoteRequest;
+import africa.semicolon.notesManagementSystem.request.dto.LogInRequest;
+import africa.semicolon.notesManagementSystem.request.dto.NoteRequest;
+import africa.semicolon.notesManagementSystem.request.dto.RegisterRequest;
+import africa.semicolon.notesManagementSystem.data.repository.NoteRepository;
+import africa.semicolon.notesManagementSystem.data.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

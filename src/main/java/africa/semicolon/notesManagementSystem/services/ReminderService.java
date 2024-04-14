@@ -1,6 +1,6 @@
 package africa.semicolon.notesManagementSystem.services;
 
-import africa.semicolon.notesManagementSystem.data.dto.ReminderRequest;
+import africa.semicolon.notesManagementSystem.request.dto.ReminderRequest;
 
 public interface ReminderService {
     ReminderRequest createReminder(ReminderRequest reminderRequest);

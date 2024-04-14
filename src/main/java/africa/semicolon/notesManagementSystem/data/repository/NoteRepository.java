@@ -1,6 +1,6 @@
-package africa.semicolon.notesManagementSystem.repository;
+package africa.semicolon.notesManagementSystem.data.repository;
 
-import africa.semicolon.notesManagementSystem.models.Note;
+import africa.semicolon.notesManagementSystem.data.models.Note;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

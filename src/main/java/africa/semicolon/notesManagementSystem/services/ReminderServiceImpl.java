@@ -1,18 +1,9 @@
 package africa.semicolon.notesManagementSystem.services;
 
-import africa.semicolon.notesManagementSystem.data.dto.EditReminderRequest;
-import africa.semicolon.notesManagementSystem.data.dto.ReminderRequest;
-import africa.semicolon.notesManagementSystem.exception.NoteDoesNotExistException;
-import africa.semicolon.notesManagementSystem.exception.UserNotFoundException;
-import africa.semicolon.notesManagementSystem.models.Note;
-import africa.semicolon.notesManagementSystem.models.Reminder;
-import africa.semicolon.notesManagementSystem.repository.NoteRepository;
-import africa.semicolon.notesManagementSystem.repository.ReminderRepository;
-import africa.semicolon.notesManagementSystem.repository.UserRepository;
+import africa.semicolon.notesManagementSystem.request.dto.ReminderRequest;
+import africa.semicolon.notesManagementSystem.data.repository.ReminderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import static africa.semicolon.notesManagementSystem.util.Mappers.*;
 
 @Service
 public class ReminderServiceImpl implements ReminderService{

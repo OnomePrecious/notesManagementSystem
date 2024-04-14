@@ -1,14 +1,14 @@
 package africa.semicolon.notesManagementSystem.services;
 
-import africa.semicolon.notesManagementSystem.data.dto.LogInRequest;
-import africa.semicolon.notesManagementSystem.data.dto.LogInResponse;
-import africa.semicolon.notesManagementSystem.data.dto.RegisterRequest;
-import africa.semicolon.notesManagementSystem.data.dto.RegisterResponse;
+import africa.semicolon.notesManagementSystem.request.dto.LogInRequest;
+import africa.semicolon.notesManagementSystem.request.dto.LogInResponse;
+import africa.semicolon.notesManagementSystem.request.dto.RegisterRequest;
+import africa.semicolon.notesManagementSystem.request.dto.RegisterResponse;
 import africa.semicolon.notesManagementSystem.exception.UnableToLogInException;
 import africa.semicolon.notesManagementSystem.exception.UnableToLogOutException;
 import africa.semicolon.notesManagementSystem.exception.UsernameAlreadyExistsException;
-import africa.semicolon.notesManagementSystem.models.User;
-import africa.semicolon.notesManagementSystem.repository.UserRepository;
+import africa.semicolon.notesManagementSystem.data.models.User;
+import africa.semicolon.notesManagementSystem.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

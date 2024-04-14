@@ -1,10 +1,11 @@
-package africa.semicolon.notesManagementSystem.data.dto;
+package africa.semicolon.notesManagementSystem.request.dto;
 
 import lombok.Data;
 
 import java.time.LocalDateTime;
+
 @Data
-public class EditReminderRequest {
+public class ReminderResponse {
     private String id;
     private String noteId;
     private LocalDateTime reminderDate;

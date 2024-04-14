@@ -1,6 +1,6 @@
-package africa.semicolon.notesManagementSystem.data.dto;
+package africa.semicolon.notesManagementSystem.request.dto;
 
-import africa.semicolon.notesManagementSystem.models.Note;
+import africa.semicolon.notesManagementSystem.data.models.Note;
 import lombok.Data;
 
 import java.util.List;

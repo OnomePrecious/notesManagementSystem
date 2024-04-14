@@ -1,4 +1,4 @@
-package africa.semicolon.notesManagementSystem.models;
+package africa.semicolon.notesManagementSystem.data.models;
 
 import lombok.Data;
 

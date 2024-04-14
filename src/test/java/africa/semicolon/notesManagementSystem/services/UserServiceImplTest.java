@@ -1,11 +1,10 @@
 package africa.semicolon.notesManagementSystem.services;
 
-import africa.semicolon.notesManagementSystem.data.dto.LogInRequest;
-import africa.semicolon.notesManagementSystem.data.dto.RegisterRequest;
-import africa.semicolon.notesManagementSystem.exception.UnableToLogInException;
+import africa.semicolon.notesManagementSystem.request.dto.LogInRequest;
+import africa.semicolon.notesManagementSystem.request.dto.RegisterRequest;
 import africa.semicolon.notesManagementSystem.exception.UnableToLogOutException;
 import africa.semicolon.notesManagementSystem.exception.UsernameAlreadyExistsException;
-import africa.semicolon.notesManagementSystem.repository.UserRepository;
+import africa.semicolon.notesManagementSystem.data.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

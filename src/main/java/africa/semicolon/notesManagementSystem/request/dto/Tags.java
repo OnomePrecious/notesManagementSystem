@@ -1,4 +1,4 @@
-package africa.semicolon.notesManagementSystem.data.dto;
+package africa.semicolon.notesManagementSystem.request.dto;
 
 public enum Tags {
     WORK,
