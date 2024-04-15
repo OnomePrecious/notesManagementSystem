@@ -2,8 +2,6 @@ package africa.semicolon.notesManagementSystem.util;
 
 import africa.semicolon.notesManagementSystem.request.dto.*;
 import africa.semicolon.notesManagementSystem.data.models.Note;
-import africa.semicolon.notesManagementSystem.data.models.Reminder;
-import africa.semicolon.notesManagementSystem.data.models.Tag;
 import africa.semicolon.notesManagementSystem.data.models.User;
 
 public class Mappers {
@@ -52,18 +50,5 @@ public class Mappers {
         reminder.setReminderDate(editReminderRequest.getReminderDate());
         reminder.setMessage(editReminderRequest.getMessage());
     }
-    public static void mapEditTagRequest(EditTagRequest editTagRequest, Tag tag){
-        tag.setName(editTagRequest.getName());
-        tag.setDateCreated(editTagRequest.getTimeEdited());
     }
-    public static void mapTagRequestToTag(TagRequest tagRequest, Tag tag){
-        tag.setName(tagRequest.getName());
-        tag.setDateCreated(tagRequest.getDateCreated());
-    }
-    public static TagResponse mapTagToTagResponse(Tag tag){
-        TagResponse tagResponse = new TagResponse();
-        tagResponse.setName(tag.getName());
-        tagResponse.setResponseTime(tag.getDateCreated());
-        return tagResponse;
-    }
-}
+

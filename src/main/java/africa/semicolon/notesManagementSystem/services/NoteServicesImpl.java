@@ -8,6 +8,7 @@ import africa.semicolon.notesManagementSystem.exception.UserNotFoundException;
 import africa.semicolon.notesManagementSystem.data.models.Note;
 import africa.semicolon.notesManagementSystem.data.repository.NoteRepository;
 import africa.semicolon.notesManagementSystem.data.repository.UserRepository;
+import africa.semicolon.notesManagementSystem.request.dto.Tags;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,24 +17,54 @@ import java.util.List;
 import static africa.semicolon.notesManagementSystem.util.Mappers.*;
 
 @Service
-public class NoteServicesImpl implements NoteServices{
+public class NoteServicesImpl implements NoteServices {
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private NoteRepository noteRepository;
+
     @Override
     public NoteResponse createNote(NoteRequest noteRequest) {
         Note note = new Note();
         var user = userRepository.findUserByUsername(noteRequest.getUsername());
-        if(user==null)throw new UserNotFoundException("You have to be a registered user");
-        if(!user.isLoggedIn())throw new UserNotFoundException("You have to log in first");
+        if (user == null) throw new UserNotFoundException("You have to be a registered user");
+        if (!user.isLoggedIn()) throw new UserNotFoundException("You have to log in first");
         mapUserNoteRequest(noteRequest, note);
         noteRepository.save(note);
         userRepository.save(user);
         return mapUserNoteToResponse(note);
 
     }
+
+    @Override
+    public NoteResponse workTag(NoteRequest noteRequest) {
+        Note foundNote = noteRepository.findNoteByTitle(noteRequest.getTitle());
+        foundNote.setTag(Tags.WORK);
+        return mapUserNoteToResponse(foundNote);
+    }
+
+    @Override
+    public NoteResponse personalTag(NoteRequest noteRequest) {
+        Note foundNote = noteRepository.findNoteByTitle(noteRequest.getTitle());
+        foundNote.setTag(Tags.PERSONAL);
+        return mapUserNoteToResponse(foundNote);
+    }
+
+    @Override
+    public NoteResponse projectTag(NoteRequest noteRequest){
+        Note foundNote = noteRepository.findNoteByTitle(noteRequest.getTitle());
+        foundNote.setTag(Tags.PROJECT);
+        return mapUserNoteToResponse(foundNote);
+
+}
 @Override
+public NoteResponse importantTag(NoteRequest noteRequest){
+    Note foundNote = noteRepository.findNoteByTitle(noteRequest.getTitle());
+    foundNote.setTag(Tags.IMPORTANT);
+    return mapUserNoteToResponse(foundNote);
+
+}
+    @Override
     public NoteResponse editNote(EditNoteRequest editNoteRequest) {
     var note = noteRepository.findNoteByContent(editNoteRequest.getContent());
     if(note == null) throw new NoteDoesNotExistException("no notes available for editing");

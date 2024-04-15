@@ -12,6 +12,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
+@RequestMapping("/notes")
 public class NotesManagementSystemController {
     @Autowired
     private UserService userService;

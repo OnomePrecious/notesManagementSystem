@@ -9,6 +9,6 @@ public class NoteRequest {
     private String title;
     private String username;
     private String content;
-    private String tag;
+    private Tags tag;
     private LocalDateTime timeOfRequest;
 }

@@ -9,6 +9,15 @@ import java.util.List;
 
 public interface NoteServices {
     NoteResponse createNote (NoteRequest noteRequest);
+
+    NoteResponse workTag(NoteRequest noteRequest);
+
+    NoteResponse personalTag(NoteRequest noteRequest);
+
+    NoteResponse projectTag(NoteRequest noteRequest);
+
+    NoteResponse importantTag(NoteRequest noteRequest);
+
     NoteResponse editNote(EditNoteRequest editNoteRequest);
     NoteResponse deleteNote(NoteRequest noteRequest);
     List<Note> findAllNote();

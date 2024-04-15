@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
 @Data
 public class NoteResponse {
     private String content;
-    private String tag;
+    private Tags tag;
     private LocalDateTime responseTime;
 }

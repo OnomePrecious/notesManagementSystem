@@ -6,5 +6,6 @@ import java.time.LocalDateTime;
 @Data
 public class TagRequest {
     private String name;
+    private Tags tag;
     private LocalDateTime dateCreated;
 }
