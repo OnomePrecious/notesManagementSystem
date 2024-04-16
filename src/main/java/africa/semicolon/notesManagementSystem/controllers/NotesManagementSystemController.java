@@ -56,7 +56,7 @@ public class NotesManagementSystemController {
             return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), BAD_REQUEST);
         }
     }
-        @PostMapping("edit_note")
+       @PostMapping("edit_note")
                 public ResponseEntity<?> updateNote(EditNoteRequest editNoteRequest) {
             try {
                 var result = noteServices.editNote(editNoteRequest);

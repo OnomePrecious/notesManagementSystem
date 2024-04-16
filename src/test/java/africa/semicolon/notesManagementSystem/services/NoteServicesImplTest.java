@@ -1,9 +1,6 @@
 package africa.semicolon.notesManagementSystem.services;
 
-import africa.semicolon.notesManagementSystem.request.dto.EditNoteRequest;
-import africa.semicolon.notesManagementSystem.request.dto.LogInRequest;
-import africa.semicolon.notesManagementSystem.request.dto.NoteRequest;
-import africa.semicolon.notesManagementSystem.request.dto.RegisterRequest;
+import africa.semicolon.notesManagementSystem.request.dto.*;
 import africa.semicolon.notesManagementSystem.data.repository.NoteRepository;
 import africa.semicolon.notesManagementSystem.data.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,7 +45,7 @@ class NoteServicesImplTest {
         noteRequest.setUsername("Precious");
         noteRequest.setTimeOfRequest(LocalDateTime.now());
         noteRequest.setContent("The content");
-        noteRequest.setTag("Work");
+        noteRequest.setTag(Tags.WORK);
         noteServices.createNote(noteRequest);
 
         assertEquals(1, noteRepository.count());
@@ -73,7 +70,7 @@ class NoteServicesImplTest {
         noteRequest.setTimeOfRequest(LocalDateTime.now());
         noteRequest.setTitle("The title");
         noteRequest.setContent("The content");
-        noteRequest.setTag("Work");
+        noteRequest.setTag(Tags.WORK);
         noteServices.createNote(noteRequest);
 
         EditNoteRequest editNoteRequest = new EditNoteRequest();
@@ -106,7 +103,7 @@ class NoteServicesImplTest {
         noteRequest.setUsername("Precious");
         noteRequest.setTimeOfRequest(LocalDateTime.now());
         noteRequest.setContent("The content");
-        noteRequest.setTag("Work");
+        noteRequest.setTag(Tags.PERSONAL);
         noteServices.createNote(noteRequest);
         noteServices.deleteNote(noteRequest);
 

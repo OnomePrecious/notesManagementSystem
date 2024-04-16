@@ -23,8 +23,10 @@ public class UserServiceImpl implements UserService {
     public LogInResponse logIn(LogInRequest logInRequest) {
         LogInResponse logInResponse = new LogInResponse();
         var user = findUserByUsername(logInRequest.getUsername());
+        if(user.getUsername().equalsIgnoreCase(logInRequest.getUsername())) user.setLoggedIn(true);
+        else throw new UnableToLogInException("Invalid username or password");
         if (user.getPassword().equalsIgnoreCase(logInRequest.getPassword())) user.setLoggedIn(true);
-        else throw new UnableToLogInException("you must have registered before you can login");
+        else throw new UnableToLogInException("Invalid username or password");
         userRepository.save(user);
         return mapUserLogInResponse(user, logInResponse);
     }
@@ -48,7 +50,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         mapUserRequestToRegister(request,user);
         if(isAValidUser(user)) userRepository.save(user);
-        else throw new UsernameAlreadyExistsException("user already exist");
+        else throw new UsernameAlreadyExistsException("A user with this name already exist, try another username");
         return mapUserToRegisterResponse(user);
     }
 
