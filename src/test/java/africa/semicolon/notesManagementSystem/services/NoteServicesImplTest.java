@@ -19,10 +19,11 @@ class NoteServicesImplTest {
     private NoteRepository noteRepository;
     @Autowired
     private UserService userService;
-    @Autowired UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @BeforeEach
-   public void setUp() {
+    public void setUp() {
         noteRepository.deleteAll();
         userRepository.deleteAll();
     }
@@ -71,17 +72,19 @@ class NoteServicesImplTest {
         noteRequest.setTitle("The title");
         noteRequest.setContent("The content");
         noteRequest.setTag(Tags.WORK);
-        noteServices.createNote(noteRequest);
+        var note = noteServices.createNote(noteRequest);
 
         EditNoteRequest editNoteRequest = new EditNoteRequest();
         editNoteRequest.setUsername("Precious");
         editNoteRequest.setDateEdited(LocalDateTime.now());
+        editNoteRequest.setNoteId(note.getNoteId());
         editNoteRequest.setTitle("This title");
-        editNoteRequest.setTag("Important");
+        editNoteRequest.setTag(Tags.PERSONAL);
         editNoteRequest.setContent("This content");
         noteServices.editNote(editNoteRequest);
 
-        assertEquals("This title", noteRepository.findNoteByContent("The content").getTitle());
+        assertEquals("This title", noteRepository.findNoteByContent("This content").getTitle());
+
 
     }
 
@@ -102,6 +105,7 @@ class NoteServicesImplTest {
         NoteRequest noteRequest = new NoteRequest();
         noteRequest.setUsername("Precious");
         noteRequest.setTimeOfRequest(LocalDateTime.now());
+        noteRequest.setTitle("my title");
         noteRequest.setContent("The content");
         noteRequest.setTag(Tags.PERSONAL);
         noteServices.createNote(noteRequest);
@@ -110,5 +114,72 @@ class NoteServicesImplTest {
 
         assertEquals(0, noteRepository.count());
 
+    }
+
+    @Test
+    public void test_thatICanDeleteNoteById() {
+        RegisterRequest request = new RegisterRequest();
+        request.setUsername("Precious");
+        request.setPassword("My password");
+        request.setEmail("precious onome002");
+        request.setId("32");
+        userService.register(request);
+
+        LogInRequest logInRequest = new LogInRequest();
+        logInRequest.setUsername("Precious");
+        logInRequest.setPassword("My password");
+        userService.logIn(logInRequest);
+
+        NoteRequest noteRequest = new NoteRequest();
+        noteRequest.setUsername("Precious");
+        noteRequest.setTimeOfRequest(LocalDateTime.now());
+        noteRequest.setTitle("my title");
+        noteRequest.setContent("The content");
+        noteRequest.setTag(Tags.PERSONAL);
+        NoteRequest noteRequest1 = new NoteRequest();
+        noteRequest1.setUsername("Precious");
+        noteRequest1.setTitle("the title");
+        noteRequest1.setTimeOfRequest(LocalDateTime.now());
+        noteRequest1.setContent("The content");
+        noteRequest1.setTag(Tags.IMPORTANT);
+        noteServices.createNote(noteRequest);
+        noteServices.createNote(noteRequest1);
+        noteServices.deleteNote(noteRequest);
+
+
+        assertEquals(1, noteRepository.count());
+    }
+
+    @Test
+    public void test_thatICanFindAllMyNotes() {
+        RegisterRequest request = new RegisterRequest();
+        request.setUsername("Precious");
+        request.setPassword("My password");
+        request.setEmail("precious onome002");
+        request.setId("32");
+        userService.register(request);
+
+        LogInRequest logInRequest = new LogInRequest();
+        logInRequest.setUsername("Precious");
+        logInRequest.setPassword("My password");
+        userService.logIn(logInRequest);
+
+        NoteRequest noteRequest = new NoteRequest();
+        noteRequest.setUsername("Precious");
+        noteRequest.setTimeOfRequest(LocalDateTime.now());
+        noteRequest.setTitle("my title");
+        noteRequest.setContent("The content");
+        noteRequest.setTag(Tags.PERSONAL);
+        NoteRequest noteRequest1 = new NoteRequest();
+        noteRequest1.setUsername("Precious");
+        noteRequest1.setTitle("the title");
+        noteRequest1.setTimeOfRequest(LocalDateTime.now());
+        noteRequest1.setContent("The content");
+        noteRequest1.setTag(Tags.IMPORTANT);
+        noteServices.createNote(noteRequest);
+        noteServices.createNote(noteRequest1);
+        noteServices.findAllNote();
+
+        assertEquals(2, noteRepository.findNoteByUsername("Precious"));
     }
 }

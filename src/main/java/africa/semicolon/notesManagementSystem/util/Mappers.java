@@ -25,17 +25,13 @@ public class Mappers {
         return logInResponse;
     }
 
-    public static void mapUserLogInRequest(LogInRequest logInRequest, User user) {
-        user.setUsername(logInRequest.getUsername());
-        user.setPassword(logInRequest.getPassword());
-
-    }
 
     public static NoteResponse mapUserNoteToResponse(Note note) {
         NoteResponse noteResponse = new NoteResponse();
         noteResponse.setContent(note.getContent());
         noteResponse.setTag(note.getTag());
         noteResponse.setResponseTime(LocalDateTime.now());
+        noteResponse.setNoteId(note.getId());
         return noteResponse;
     }
 
@@ -46,17 +42,12 @@ public class Mappers {
         note.setDateCreated(LocalDateTime.now());
     }
     public static void mapEditNoteRequest(EditNoteRequest editNoteRequest, Note note){
+        note.setId(editNoteRequest.getNoteId());
        note.setTitle(editNoteRequest.getTitle());
         note.setContent(editNoteRequest.getContent());
        note.setTag(Tags.WORK);
         note.setDateCreated(LocalDateTime.now());
 
     }
-//    public static void mapEditReminderRequest(EditReminderRequest editReminderRequest, Reminder reminder){
-//        reminder.setNoteId(editReminderRequest.getNoteId());
-//        reminder.setReminderDate(editReminderRequest.getReminderDate());
-//        reminder.setMessage(editReminderRequest.getMessage());
-//    }
-//    }
-//
+
 }

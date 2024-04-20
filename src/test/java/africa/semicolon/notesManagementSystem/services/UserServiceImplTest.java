@@ -128,7 +128,7 @@ class UserServiceImplTest {
         RegisterRequest request1 = new RegisterRequest();
         request.setUsername("Precious");
         request.setPassword("My password");
-        request.setEmail("preciousonome002");
+        request.setEmail(" preciousonome002");
         request.setId("32");
         request1.setUsername("Precious");
         request1.setPassword("password");

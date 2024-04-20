@@ -66,15 +66,15 @@ public NoteResponse importantTag(NoteRequest noteRequest){
 }
     @Override
     public NoteResponse editNote(EditNoteRequest editNoteRequest) {
-    var note = noteRepository.findNoteByContent(editNoteRequest.getContent());
-    if(note == null) throw new NoteDoesNotExistException("no notes available for editing");
-    mapEditNoteRequest(editNoteRequest, note);
-    noteRepository.save(note);
-    var user = userRepository.findUserByUsername(editNoteRequest.getUsername());
-    if(!user.isLoggedIn()) throw new UserNotFoundException("You have to register first");
-    user.setNotes(noteRepository.findNoteByUsername(editNoteRequest.getUsername()));
-    userRepository.save(user);
-        return mapUserNoteToResponse(note);
+        var note = noteRepository.findNoteById(editNoteRequest.getNoteId());
+        if(note == null) throw new NoteDoesNotExistException("no notes available for editing");
+        mapEditNoteRequest(editNoteRequest, note);
+        noteRepository.save(note);
+        var user = userRepository.findUserByUsername(editNoteRequest.getUsername());
+        if(!user.isLoggedIn()) throw new UserNotFoundException("You have to register first");
+        user.setNotes(noteRepository.findNoteByUsername(editNoteRequest.getUsername()));
+        userRepository.save(user);
+            return mapUserNoteToResponse(note);
 
     }
 
@@ -91,7 +91,6 @@ public NoteResponse importantTag(NoteRequest noteRequest){
         return mapUserNoteToResponse(note);
 
     }
-
     @Override
     public List<Note> findAllNote() {
         return noteRepository.findAll();
