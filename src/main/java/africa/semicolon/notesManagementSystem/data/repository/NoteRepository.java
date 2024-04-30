@@ -13,4 +13,6 @@ public interface NoteRepository extends MongoRepository<Note, String> {
     Note findNoteByTitle(String title);
 
     Note findNoteById(String noteId);
+
+    Note shareNote(String noteId);
 }

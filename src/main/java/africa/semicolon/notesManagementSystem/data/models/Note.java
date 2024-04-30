@@ -15,5 +15,6 @@ public class Note {
     private String content;
     private LocalDateTime dateCreated;
     private Tags tag;
+    private String receiverName;
     }
 

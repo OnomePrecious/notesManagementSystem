@@ -1,14 +1,11 @@
 package africa.semicolon.notesManagementSystem.services;
 
-import africa.semicolon.notesManagementSystem.request.dto.EditNoteRequest;
-import africa.semicolon.notesManagementSystem.request.dto.NoteRequest;
-import africa.semicolon.notesManagementSystem.request.dto.NoteResponse;
+import africa.semicolon.notesManagementSystem.request.dto.*;
 import africa.semicolon.notesManagementSystem.exception.NoteDoesNotExistException;
 import africa.semicolon.notesManagementSystem.exception.UserNotFoundException;
 import africa.semicolon.notesManagementSystem.data.models.Note;
 import africa.semicolon.notesManagementSystem.data.repository.NoteRepository;
 import africa.semicolon.notesManagementSystem.data.repository.UserRepository;
-import africa.semicolon.notesManagementSystem.request.dto.Tags;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -95,4 +92,20 @@ public NoteResponse importantTag(NoteRequest noteRequest){
     public List<Note> findAllNote() {
         return noteRepository.findAll();
     }
+
+    @Override
+    public ShareNoteResponse shareNote(ShareNoteRequest shareNoteRequest) {
+        var note = noteRepository.findNoteById(shareNoteRequest.getNoteId());
+        if(note == null)  throw new NoteDoesNotExistException("No notes available");
+        mapShareNoteRequest(shareNoteRequest, note);
+        noteRepository.save(note);
+        var user = userRepository.findUserByUsername(shareNoteRequest.getUsername());
+       if (!user.isLoggedIn()) throw new UserNotFoundException(("You must be logged in"));
+       userRepository.save(user);
+       noteRepository.shareNote(shareNoteRequest.getNoteId());
+       return mapToShareNoteResponseToNote(note);
+
+
+    }
 }
+

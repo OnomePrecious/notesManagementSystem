@@ -49,5 +49,19 @@ public class Mappers {
         note.setDateCreated(LocalDateTime.now());
 
     }
+    public static void mapShareNoteRequest(ShareNoteRequest shareNoteRequest, Note note){
+        note.setId(shareNoteRequest.getId());
+        note.setUsername(shareNoteRequest.getUsername());
+        note.setReceiverName(shareNoteRequest.getReceiverName());
+        note.setDateCreated(LocalDateTime.now());
+    }
+    public static  ShareNoteResponse mapToShareNoteResponseToNote(Note note) {
+        ShareNoteResponse shareNoteResponse = new ShareNoteResponse();
+        shareNoteResponse.getMessage();
+        shareNoteResponse.setNoteId(note.getId());
+        shareNoteResponse.setReceiverName(note.getReceiverName());
+
+        return shareNoteResponse;
+    }
 
 }
