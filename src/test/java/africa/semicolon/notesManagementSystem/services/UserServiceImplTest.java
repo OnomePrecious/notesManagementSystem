@@ -1,7 +1,7 @@
 package africa.semicolon.notesManagementSystem.services;
 
-import africa.semicolon.notesManagementSystem.request.dto.LogInRequest;
-import africa.semicolon.notesManagementSystem.request.dto.RegisterRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.LogInRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.RegisterRequest;
 import africa.semicolon.notesManagementSystem.exception.UnableToLogOutException;
 import africa.semicolon.notesManagementSystem.exception.UsernameAlreadyExistsException;
 import africa.semicolon.notesManagementSystem.data.repository.UserRepository;

@@ -1,7 +1,11 @@
 package africa.semicolon.notesManagementSystem.services;
 
-import africa.semicolon.notesManagementSystem.request.dto.*;
 import africa.semicolon.notesManagementSystem.data.models.Note;
+import africa.semicolon.notesManagementSystem.dtos.request.EditNoteRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.NoteRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.ShareNoteRequest;
+import africa.semicolon.notesManagementSystem.dtos.response.NoteResponse;
+import africa.semicolon.notesManagementSystem.dtos.response.ShareNoteResponse;
 
 import java.util.List;
 
@@ -18,7 +22,7 @@ public interface NoteServices {
 
     NoteResponse editNote(EditNoteRequest editNoteRequest);
     NoteResponse deleteNote(NoteRequest noteRequest);
-    List<Note> findAllNote();
+    List<Note> findAllNotes();
     ShareNoteResponse shareNote(ShareNoteRequest shareNoteRequest);
 
 }

@@ -1,12 +1,19 @@
 package africa.semicolon.notesManagementSystem.controllers;
 
-import africa.semicolon.notesManagementSystem.request.dto.*;
+import africa.semicolon.notesManagementSystem.data.models.Note;
 import africa.semicolon.notesManagementSystem.exception.NotesManagementSystemError;
+import africa.semicolon.notesManagementSystem.dtos.request.EditNoteRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.LogInRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.NoteRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.RegisterRequest;
+import africa.semicolon.notesManagementSystem.dtos.response.ApiResponse;
 import africa.semicolon.notesManagementSystem.services.NoteServices;
 import africa.semicolon.notesManagementSystem.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -65,7 +72,15 @@ public class NotesManagementSystemController {
                 return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), BAD_REQUEST);
             }
         }
-
+        @GetMapping("findAll_notes")
+            public ResponseEntity<?> findAllNotes(){
+            try{
+                List<Note> findAllNotes = noteServices.findAllNotes();
+                return new ResponseEntity<>(new ApiResponse(true, findAllNotes()), CREATED);
+            } catch (NotesManagementSystemError e){
+                return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), BAD_REQUEST);
+            }
+            }
         @DeleteMapping("delete_note")
     public ResponseEntity<?> deleteNote(@RequestBody NoteRequest noteRequest){
         try{

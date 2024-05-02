@@ -1,6 +1,6 @@
 package africa.semicolon.notesManagementSystem.data.models;
 
-import africa.semicolon.notesManagementSystem.request.dto.Tags;
+import africa.semicolon.notesManagementSystem.dtos.response.Tags;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -15,6 +15,5 @@ public class Note {
     private String content;
     private LocalDateTime dateCreated;
     private Tags tag;
-    private String receiverName;
     }
 

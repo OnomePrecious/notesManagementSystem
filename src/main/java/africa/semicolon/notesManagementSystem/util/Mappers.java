@@ -1,8 +1,12 @@
 package africa.semicolon.notesManagementSystem.util;
 
-import africa.semicolon.notesManagementSystem.request.dto.*;
 import africa.semicolon.notesManagementSystem.data.models.Note;
 import africa.semicolon.notesManagementSystem.data.models.User;
+import africa.semicolon.notesManagementSystem.dtos.request.EditNoteRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.NoteRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.RegisterRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.ShareNoteRequest;
+import africa.semicolon.notesManagementSystem.dtos.response.*;
 
 import java.time.LocalDateTime;
 
@@ -52,14 +56,12 @@ public class Mappers {
     public static void mapShareNoteRequest(ShareNoteRequest shareNoteRequest, Note note){
         note.setId(shareNoteRequest.getId());
         note.setUsername(shareNoteRequest.getUsername());
-        note.setReceiverName(shareNoteRequest.getReceiverName());
         note.setDateCreated(LocalDateTime.now());
     }
-    public static  ShareNoteResponse mapToShareNoteResponseToNote(Note note) {
+    public static ShareNoteResponse mapToShareNoteResponseToNote(Note note) {
         ShareNoteResponse shareNoteResponse = new ShareNoteResponse();
-        shareNoteResponse.getMessage();
+        shareNoteResponse.setMessage("Successfully shared note " + note.getId());
         shareNoteResponse.setNoteId(note.getId());
-        shareNoteResponse.setReceiverName(note.getReceiverName());
 
         return shareNoteResponse;
     }

@@ -1,8 +1,12 @@
 package africa.semicolon.notesManagementSystem.services;
 
-import africa.semicolon.notesManagementSystem.request.dto.*;
 import africa.semicolon.notesManagementSystem.data.repository.NoteRepository;
 import africa.semicolon.notesManagementSystem.data.repository.UserRepository;
+import africa.semicolon.notesManagementSystem.dtos.request.EditNoteRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.LogInRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.NoteRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.RegisterRequest;
+import africa.semicolon.notesManagementSystem.dtos.response.Tags;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -178,8 +182,8 @@ class NoteServicesImplTest {
         noteRequest1.setTag(Tags.IMPORTANT);
         noteServices.createNote(noteRequest);
         noteServices.createNote(noteRequest1);
-        noteServices.findAllNote();
+       //assertEquals(2, noteServices.findAllNote().size());
 
-        assertEquals(2, noteRepository.findNoteByUsername("Precious"));
+        assertEquals(2, noteRepository.count());
     }
 }

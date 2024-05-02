@@ -7,12 +7,11 @@ import java.util.List;
 
 public interface NoteRepository extends MongoRepository<Note, String> {
     Note findNoteByContent(String content);
-
-    List<Note> findNoteByUsername(String username);
+    Note findNoteByUsername(String username);
 
     Note findNoteByTitle(String title);
 
     Note findNoteById(String noteId);
 
-    Note shareNote(String noteId);
+//    Note shareNote(String noteId);
 }

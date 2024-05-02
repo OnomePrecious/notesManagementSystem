@@ -1,4 +1,4 @@
-package africa.semicolon.notesManagementSystem.request.dto;
+package africa.semicolon.notesManagementSystem.dtos.request;
 
 import lombok.Data;
 
