@@ -32,6 +32,7 @@ public class Mappers {
 
     public static NoteResponse mapUserNoteToResponse(Note note) {
         NoteResponse noteResponse = new NoteResponse();
+        noteResponse.setUsername(note.getUsername());
         noteResponse.setContent(note.getContent());
         noteResponse.setTag(note.getTag());
         noteResponse.setResponseTime(LocalDateTime.now());
@@ -40,6 +41,7 @@ public class Mappers {
     }
 
     public static void mapUserNoteRequest(NoteRequest noteRequest, Note note) {
+        note.setUsername(noteRequest.getUsername());
         note.setContent(noteRequest.getContent());
         note.setTitle(noteRequest.getTitle());
         note.setTag(noteRequest.getTag());
