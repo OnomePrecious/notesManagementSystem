@@ -2,10 +2,7 @@ package africa.semicolon.notesManagementSystem.services;
 
 import africa.semicolon.notesManagementSystem.data.repository.NoteRepository;
 import africa.semicolon.notesManagementSystem.data.repository.UserRepository;
-import africa.semicolon.notesManagementSystem.dtos.request.EditNoteRequest;
-import africa.semicolon.notesManagementSystem.dtos.request.LogInRequest;
-import africa.semicolon.notesManagementSystem.dtos.request.NoteRequest;
-import africa.semicolon.notesManagementSystem.dtos.request.RegisterRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.*;
 import africa.semicolon.notesManagementSystem.dtos.response.Tags;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -186,4 +183,43 @@ class NoteServicesImplTest {
 
         assertEquals(2, noteRepository.count());
     }
+    @Test
+    public void testThatICanShareMyNote(){
+        RegisterRequest request = new RegisterRequest();
+        request.setUsername("Precious");
+        request.setPassword("My password");
+        request.setEmail("precious onome002");
+        request.setId("32");
+        userService.register(request);
+
+        RegisterRequest request1 = new RegisterRequest();
+        request1.setUsername("My name");
+        request1.setPassword("password");
+        request1.setEmail("precious67");
+        request1.setId("34");
+        userService.register(request1);
+
+
+        LogInRequest logInRequest = new LogInRequest();
+        logInRequest.setUsername("Precious");
+        logInRequest.setPassword("My password");
+        userService.logIn(logInRequest);
+
+        NoteRequest noteRequest = new NoteRequest();
+        noteRequest.setUsername("Precious");
+        noteRequest.setTimeOfRequest(LocalDateTime.now());
+        noteRequest.setContent("The content");
+        noteRequest.setTag(Tags.WORK);
+        noteServices.createNote(noteRequest);
+
+        ShareNoteRequest shareNoteRequest = new ShareNoteRequest();
+        shareNoteRequest.setUsername("Precious");
+        shareNoteRequest.setNoteId("23");
+        shareNoteRequest.setReceiverName("My name");
+        shareNoteRequest.setDateShared(LocalDateTime.now());
+        noteServices.shareNote(shareNoteRequest);
+
+
+    }
+
 }

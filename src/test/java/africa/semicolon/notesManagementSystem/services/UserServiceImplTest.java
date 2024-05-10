@@ -75,11 +75,12 @@ class UserServiceImplTest {
     @Test
     public void test_thatICanRegisterTwoPeople(){
         RegisterRequest request = new RegisterRequest();
-        RegisterRequest request1 = new RegisterRequest();
         request.setUsername("Precious");
         request.setPassword("My password");
         request.setEmail("preciousonome002");
         request.setId("32");
+
+        RegisterRequest request1 = new RegisterRequest();
         request1.setUsername("My name");
         request1.setPassword("password");
         request1.setEmail("precious67");

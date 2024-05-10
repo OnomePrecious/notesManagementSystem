@@ -74,7 +74,6 @@ public NoteResponse importantTag(NoteRequest noteRequest){
         noteRepository.save(note);
         var user = userRepository.findUserByUsername(editNoteRequest.getUsername());
         if(!user.isLoggedIn()) throw new UserNotFoundException("You have to register first");
-       // user.setNotes(noteRepository.findNoteByUsername(editNoteRequest.getUsername()));
         userRepository.save(user);
             return mapUserNoteToResponse(note);
 
@@ -88,9 +87,6 @@ public NoteResponse importantTag(NoteRequest noteRequest){
         if(!user.isLoggedIn()) throw new UserNotFoundException("You have to log in");
         noteRepository.deleteById(note.getId());
         noteRepository.delete(note);
-       //user.setNotes(noteRepository.findNoteByUsername(note.getId()));
-        //user.setNotes(noteRepository.findNoteByUsername(note.getContent()));
-       // userRepository.save(user);
         return mapUserNoteToResponse(note);
 
     }
@@ -102,17 +98,18 @@ public NoteResponse importantTag(NoteRequest noteRequest){
 
     @Override
     public ShareNoteResponse shareNote(ShareNoteRequest shareNoteRequest) {
-        var note = noteRepository.findNoteById(shareNoteRequest.getNoteId());
-        if(note == null)  throw new NoteDoesNotExistException("No notes available");
-        mapShareNoteRequest(shareNoteRequest, note);
-        noteRepository.save(note);
-        var user = userRepository.findUserByUsername(shareNoteRequest.getUsername());
-       if (!user.isLoggedIn()) throw new UserNotFoundException(("You must be logged in"));
-       userRepository.save(user);
-//       noteRepository.shareNote(shareNoteRequest.getNoteId());
-       return mapToShareNoteResponseToNote(note);
+            var note = noteRepository.findNoteById(shareNoteRequest.getNoteId());
+            if(note == null) throw new NoteDoesNotExistException("no notes available for sharing");
+            mapShareNoteRequest(shareNoteRequest, note);
+            noteRepository.save(note);
+            var user = userRepository.findUserByUsername(shareNoteRequest.getUsername());
+            if(!user.isLoggedIn()) throw new UserNotFoundException("You have to register first");
+            var user1 = userRepository.findUserByUsername(shareNoteRequest.getReceiverName());
+            userRepository.save(user);
+            userRepository.save(user1);
+            return mapToShareNoteResponseToNote(note);
 
 
-   }
+        }
 }
 

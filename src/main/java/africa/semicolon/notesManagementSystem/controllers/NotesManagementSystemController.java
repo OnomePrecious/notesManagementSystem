@@ -20,6 +20,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequestMapping("/notes")
+@CrossOrigin(origins = "*")
 public class NotesManagementSystemController {
     @Autowired
     private UserService userService;
