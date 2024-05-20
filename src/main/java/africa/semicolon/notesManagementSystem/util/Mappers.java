@@ -2,10 +2,7 @@ package africa.semicolon.notesManagementSystem.util;
 
 import africa.semicolon.notesManagementSystem.data.models.Note;
 import africa.semicolon.notesManagementSystem.data.models.User;
-import africa.semicolon.notesManagementSystem.dtos.request.EditNoteRequest;
-import africa.semicolon.notesManagementSystem.dtos.request.NoteRequest;
-import africa.semicolon.notesManagementSystem.dtos.request.RegisterRequest;
-import africa.semicolon.notesManagementSystem.dtos.request.ShareNoteRequest;
+import africa.semicolon.notesManagementSystem.dtos.request.*;
 import africa.semicolon.notesManagementSystem.dtos.response.*;
 
 import java.time.LocalDateTime;
@@ -66,6 +63,20 @@ public class Mappers {
         shareNoteResponse.setNoteId(note.getId());
 
         return shareNoteResponse;
+    }
+
+
+    public static void mapChangePasswordRequest(ChangePasswordRequest changePasswordRequest, User user){
+        user.setUsername(changePasswordRequest.getUsername());
+        user.setPassword(changePasswordRequest.getNewPassword());
+    }
+
+
+    public static ChangePasswordResponse mapChangePasswordRequestToUser(User user){
+        ChangePasswordResponse changePasswordResponse = new ChangePasswordResponse();
+        changePasswordResponse.setMessage("successful change of password " + user.getUsername());
+        changePasswordResponse.setUsername(user.getUsername());
+        return changePasswordResponse;
     }
 
 }

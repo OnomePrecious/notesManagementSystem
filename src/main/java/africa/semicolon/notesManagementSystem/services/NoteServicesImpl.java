@@ -100,16 +100,27 @@ public NoteResponse importantTag(NoteRequest noteRequest){
     public ShareNoteResponse shareNote(ShareNoteRequest shareNoteRequest) {
             var note = noteRepository.findNoteById(shareNoteRequest.getNoteId());
             if(note == null) throw new NoteDoesNotExistException("no notes available for sharing");
-            mapShareNoteRequest(shareNoteRequest, note);
-            noteRepository.save(note);
             var user = userRepository.findUserByUsername(shareNoteRequest.getUsername());
             if(!user.isLoggedIn()) throw new UserNotFoundException("You have to register first");
             var user1 = userRepository.findUserByUsername(shareNoteRequest.getReceiverName());
+            var noteShared = cloneNote(note,user1.getUsername());
+            user1.getNotes().add(noteShared);
+            var notes =List.of(note,noteShared);
+            noteRepository.saveAll(notes);
             userRepository.save(user);
             userRepository.save(user1);
             return mapToShareNoteResponseToNote(note);
-
-
         }
+
+    @Override
+    public Note cloneNote(Note cloneNoteRequest, String username) {
+             Note clonedNote = new Note();
+             clonedNote.setUsername(username);
+             clonedNote.setContent(cloneNoteRequest.getContent());
+             clonedNote.setTitle(cloneNoteRequest.getTitle());
+             clonedNote.setTag(cloneNoteRequest.getTag());
+             clonedNote.setDateCreated(cloneNoteRequest.getDateCreated());
+             return noteRepository.save(clonedNote);
+    }
 }
 

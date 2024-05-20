@@ -1,11 +1,14 @@
 package africa.semicolon.notesManagementSystem.services;
 
+import africa.semicolon.notesManagementSystem.dtos.request.ChangePasswordRequest;
 import africa.semicolon.notesManagementSystem.dtos.request.LogInRequest;
+import africa.semicolon.notesManagementSystem.dtos.response.ChangePasswordResponse;
 import africa.semicolon.notesManagementSystem.dtos.response.LogInResponse;
 import africa.semicolon.notesManagementSystem.dtos.request.RegisterRequest;
 import africa.semicolon.notesManagementSystem.dtos.response.RegisterResponse;
 import africa.semicolon.notesManagementSystem.exception.UnableToLogInException;
 import africa.semicolon.notesManagementSystem.exception.UnableToLogOutException;
+import africa.semicolon.notesManagementSystem.exception.UserNotFoundException;
 import africa.semicolon.notesManagementSystem.exception.UsernameAlreadyExistsException;
 import africa.semicolon.notesManagementSystem.data.models.User;
 import africa.semicolon.notesManagementSystem.data.repository.UserRepository;
@@ -23,7 +26,7 @@ public class UserServiceImpl implements UserService {
     public LogInResponse logIn(LogInRequest logInRequest) {
         LogInResponse logInResponse = new LogInResponse();
         var user = findUserByUsername(logInRequest.getUsername());
-        if(user.getUsername().equalsIgnoreCase(logInRequest.getUsername())) user.setLoggedIn(true);
+        if (user.getUsername().equalsIgnoreCase(logInRequest.getUsername())) user.setLoggedIn(true);
         else throw new UnableToLogInException("Invalid username or password");
         if (user.getPassword().equalsIgnoreCase(logInRequest.getPassword())) user.setLoggedIn(true);
         else throw new UnableToLogInException("Invalid username or password");
@@ -48,8 +51,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public RegisterResponse register(RegisterRequest request) {
         User user = new User();
-        mapUserRequestToRegister(request,user);
-        if(isAValidUser(user)) userRepository.save(user);
+        mapUserRequestToRegister(request, user);
+        if (isAValidUser(user)) userRepository.save(user);
         else throw new UsernameAlreadyExistsException("A user with this name already exist, try another username");
         return mapUserToRegisterResponse(user);
     }
@@ -58,4 +61,15 @@ public class UserServiceImpl implements UserService {
     public User findUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }
+
+    @Override
+    public ChangePasswordResponse changePassword(ChangePasswordRequest changePasswordRequest) {
+        var user = userRepository.findUserByUsername(changePasswordRequest.getUsername());
+        if(!user.isLoggedIn()) throw new UserNotFoundException("You have to register first");
+        mapChangePasswordRequest(changePasswordRequest, user);
+        if(isAValidUser(user)) userRepository.save(user);
+        else throw new UserNotFoundException("A user with this name already exist");
+        return mapChangePasswordRequestToUser(user);
+    }
+
 }

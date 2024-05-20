@@ -1,6 +1,8 @@
 package africa.semicolon.notesManagementSystem.services;
 
+import africa.semicolon.notesManagementSystem.dtos.request.ChangePasswordRequest;
 import africa.semicolon.notesManagementSystem.dtos.request.LogInRequest;
+import africa.semicolon.notesManagementSystem.dtos.response.ChangePasswordResponse;
 import africa.semicolon.notesManagementSystem.dtos.response.LogInResponse;
 import africa.semicolon.notesManagementSystem.dtos.request.RegisterRequest;
 import africa.semicolon.notesManagementSystem.dtos.response.RegisterResponse;
@@ -11,4 +13,5 @@ public interface UserService  {
     LogInResponse logOut(LogInRequest logInRequest);
     RegisterResponse register(RegisterRequest Request);
     User findUserByUsername(String username);
+    ChangePasswordResponse changePassword(ChangePasswordRequest changePasswordRequest);
 }

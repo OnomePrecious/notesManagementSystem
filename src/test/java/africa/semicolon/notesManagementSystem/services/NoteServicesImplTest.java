@@ -101,6 +101,7 @@ class NoteServicesImplTest {
         LogInRequest logInRequest = new LogInRequest();
         logInRequest.setUsername("Precious");
         logInRequest.setPassword("My password");
+
         userService.logIn(logInRequest);
 
         NoteRequest noteRequest = new NoteRequest();
@@ -179,7 +180,6 @@ class NoteServicesImplTest {
         noteRequest1.setTag(Tags.IMPORTANT);
         noteServices.createNote(noteRequest);
         noteServices.createNote(noteRequest1);
-       //assertEquals(2, noteServices.findAllNote().size());
 
         assertEquals(2, noteRepository.count());
     }
@@ -189,15 +189,14 @@ class NoteServicesImplTest {
         request.setUsername("Precious");
         request.setPassword("My password");
         request.setEmail("precious onome002");
-        request.setId("32");
         userService.register(request);
 
         RegisterRequest request1 = new RegisterRequest();
         request1.setUsername("My name");
         request1.setPassword("password");
         request1.setEmail("precious67");
-        request1.setId("34");
         userService.register(request1);
+
 
 
         LogInRequest logInRequest = new LogInRequest();
@@ -210,16 +209,37 @@ class NoteServicesImplTest {
         noteRequest.setTimeOfRequest(LocalDateTime.now());
         noteRequest.setContent("The content");
         noteRequest.setTag(Tags.WORK);
-        noteServices.createNote(noteRequest);
+       var note = noteServices.createNote(noteRequest);
 
         ShareNoteRequest shareNoteRequest = new ShareNoteRequest();
         shareNoteRequest.setUsername("Precious");
-        shareNoteRequest.setNoteId("23");
+        shareNoteRequest.setNoteId(note.getNoteId());
         shareNoteRequest.setReceiverName("My name");
         shareNoteRequest.setDateShared(LocalDateTime.now());
         noteServices.shareNote(shareNoteRequest);
+        var user1 =userService.findUserByUsername(request1.getUsername());
+        assertEquals(2, noteRepository.count());
 
-
+        assertEquals(user1.getNotes().size(),1);
     }
 
+        @Test
+    public void test_thatUserCanChangePassword(){
+            RegisterRequest request = new RegisterRequest();
+            request.setUsername("Precious");
+            request.setPassword("My password");
+            request.setEmail("precious onome002");
+            request.setId("32");
+            userService.register(request);
+
+            LogInRequest logInRequest = new LogInRequest();
+            logInRequest.setUsername("Precious");
+            logInRequest.setPassword("My password");
+            userService.logIn(logInRequest);
+
+            ChangePasswordRequest changePasswordRequest = new ChangePasswordRequest();
+            changePasswordRequest.setUsername("Precious");
+            changePasswordRequest.setPassword("My password");
+
+        }
 }

@@ -24,5 +24,5 @@ public interface NoteServices {
     NoteResponse deleteNote(NoteRequest noteRequest);
     List<Note> findAllNotes();
     ShareNoteResponse shareNote(ShareNoteRequest shareNoteRequest);
-
+    Note cloneNote(Note cloneNoteRequest, String username);
 }
