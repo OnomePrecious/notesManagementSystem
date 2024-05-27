@@ -239,7 +239,10 @@ class NoteServicesImplTest {
 
             ChangePasswordRequest changePasswordRequest = new ChangePasswordRequest();
             changePasswordRequest.setUsername("Precious");
-            changePasswordRequest.setPassword("My password");
+            changePasswordRequest.setPassword("new password");
+            userService.changePassword(changePasswordRequest);
+
+            assertEquals("Precious", userRepository.findUserByUsername("Precious"));
 
         }
 }

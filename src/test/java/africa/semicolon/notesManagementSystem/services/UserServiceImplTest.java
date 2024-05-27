@@ -1,5 +1,6 @@
 package africa.semicolon.notesManagementSystem.services;
 
+import africa.semicolon.notesManagementSystem.dtos.request.ChangePasswordRequest;
 import africa.semicolon.notesManagementSystem.dtos.request.LogInRequest;
 import africa.semicolon.notesManagementSystem.dtos.request.RegisterRequest;
 import africa.semicolon.notesManagementSystem.exception.UnableToLogOutException;
@@ -139,6 +140,31 @@ class UserServiceImplTest {
         assertThrows(UsernameAlreadyExistsException.class, () -> userService.register(request1));
 
     }
+    @Test
+    public void testICanChangeMyPassword() {
+        RegisterRequest request = new RegisterRequest();
+        request.setUsername("Precious");
+        request.setPassword("My password");
+        request.setEmail("precious onome002");
+        request.setId("32");
+        userService.register(request);
 
+        LogInRequest logInRequest = new LogInRequest();
+        logInRequest.setUsername("Precious");
+        logInRequest.setPassword("My password");
+        userService.logIn(logInRequest);
+
+
+        ChangePasswordRequest changePasswordRequest = new ChangePasswordRequest();
+        changePasswordRequest.setUsername("Precious");
+        changePasswordRequest.setPassword("My password");
+        changePasswordRequest.setNewPassword("My new password");
+        userService.changePassword(changePasswordRequest);
+
+        assertEquals("Precious", userRepository.findUserByUsername("Precious").getUsername());
+        assertEquals(1, userRepository.count());
+
+
+    }
 
     }

@@ -66,9 +66,10 @@ public class Mappers {
     }
 
 
-    public static void mapChangePasswordRequest(ChangePasswordRequest changePasswordRequest, User user){
+    public static User mapChangePasswordRequest(ChangePasswordRequest changePasswordRequest, User user){
         user.setUsername(changePasswordRequest.getUsername());
         user.setPassword(changePasswordRequest.getNewPassword());
+        return user;
     }
 
 

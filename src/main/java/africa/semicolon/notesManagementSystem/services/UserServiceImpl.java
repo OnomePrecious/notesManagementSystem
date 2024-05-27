@@ -64,11 +64,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ChangePasswordResponse changePassword(ChangePasswordRequest changePasswordRequest) {
-        var user = userRepository.findUserByUsername(changePasswordRequest.getUsername());
+        User user = userRepository.findUserByUsername(changePasswordRequest.getUsername());
+        if (user == null)throw new UserNotFoundException("You have to register first");
         if(!user.isLoggedIn()) throw new UserNotFoundException("You have to register first");
         mapChangePasswordRequest(changePasswordRequest, user);
-        if(isAValidUser(user)) userRepository.save(user);
-        else throw new UserNotFoundException("A user with this name already exist");
+//        if(isAValidUser(user)) userRepository.save(user);
+//       user else throw new UserNotFoundException("A user with this name already exist");
+       userRepository.save(user);
         return mapChangePasswordRequestToUser(user);
     }
 

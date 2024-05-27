@@ -1,11 +1,8 @@
 package africa.semicolon.notesManagementSystem.controllers;
 
 import africa.semicolon.notesManagementSystem.data.models.Note;
+import africa.semicolon.notesManagementSystem.dtos.request.*;
 import africa.semicolon.notesManagementSystem.exception.NotesManagementSystemError;
-import africa.semicolon.notesManagementSystem.dtos.request.EditNoteRequest;
-import africa.semicolon.notesManagementSystem.dtos.request.LogInRequest;
-import africa.semicolon.notesManagementSystem.dtos.request.NoteRequest;
-import africa.semicolon.notesManagementSystem.dtos.request.RegisterRequest;
 import africa.semicolon.notesManagementSystem.dtos.response.ApiResponse;
 import africa.semicolon.notesManagementSystem.services.NoteServices;
 import africa.semicolon.notesManagementSystem.services.UserService;
@@ -91,4 +88,12 @@ public class NotesManagementSystemController {
             return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), BAD_REQUEST);
         }
         }
+        @PatchMapping("change_password")
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest){
+        try {
+            var result = userService.changePassword(changePasswordRequest);
+            return new ResponseEntity<>(new ApiResponse(true, result), CREATED);
+        } catch (NotesManagementSystemError e) {
+    return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), BAD_REQUEST);
+            }        }
 }
